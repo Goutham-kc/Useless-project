@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Button } from "@/components/ui/button";
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { Button } from '@/components/ui/button';
 
 interface ReactionGameProps {
   onComplete: () => void;
@@ -12,16 +12,23 @@ export const ReactionGame: React.FC<ReactionGameProps> = ({ onComplete, onClose 
   const [reactionTime, setReactionTime] = useState<number>(0);
   const [attempts, setAttempts] = useState<number[]>([]);
   const [currentRound, setCurrentRound] = useState(0);
-  
+
   const targetRounds = 3;
   const maxReactionTime = 500; // 500ms or less to pass
+
+  // Ref to hold latest gameState for timeout callback
+  const gameStateRef = useRef(gameState);
+  useEffect(() => {
+    gameStateRef.current = gameState;
+  }, [gameState]);
 
   const startGame = () => {
     setGameState('ready');
     const delay = Math.random() * 4000 + 1000; // 1-5 seconds
-    
+
     setTimeout(() => {
-      if (gameState !== 'ready') return;
+      // Use gameStateRef.current to get latest gameState
+      if (gameStateRef.current !== 'ready') return;
       setGameState('click');
       setStartTime(Date.now());
     }, delay);
@@ -63,7 +70,7 @@ export const ReactionGame: React.FC<ReactionGameProps> = ({ onComplete, onClose 
     }
   }, [attempts, onComplete]);
 
-  const avgReactionTime = attempts.length > 0 
+  const avgReactionTime = attempts.length > 0
     ? Math.round(attempts.reduce((a, b) => a + b, 0) / attempts.length)
     : 0;
 
@@ -116,7 +123,7 @@ export const ReactionGame: React.FC<ReactionGameProps> = ({ onComplete, onClose 
       <div className="space-y-2">
         <h3 className="text-2xl font-bold">⚡ Lightning Reflexes</h3>
         <p className="text-muted-foreground">
-          React in under {maxReactionTime}ms for 3 rounds to unlock your field!
+          React in under {maxReactionTime}ms for {targetRounds} rounds to unlock your field!
         </p>
         <div className="text-sm text-muted-foreground">
           Round {currentRound + 1}/{targetRounds} • Avg: {avgReactionTime}ms
@@ -164,23 +171,23 @@ export const ReactionGame: React.FC<ReactionGameProps> = ({ onComplete, onClose 
         <Button onClick={onClose} variant="outline">
           Cancel
         </Button>
-        
+
         {gameState === 'waiting' && currentRound < targetRounds && (
           <Button onClick={startGame} className="bg-blue-500">
             Start Round {currentRound + 1}
           </Button>
         )}
-        
+
         {(gameState === 'clicked' || gameState === 'tooSoon') && currentRound < targetRounds && (
           <Button onClick={nextRound} className="bg-game-secondary text-white">
             Next Round
           </Button>
         )}
-        
+
         <Button onClick={resetGame} variant="outline">
           Reset
         </Button>
-        
+
         {isComplete && (
           <Button onClick={onComplete} className="bg-game-success text-white">
             ⚡ Complete Challenge!
