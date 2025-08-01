@@ -51,14 +51,25 @@ npm run dev
 For Software:
 
 # Screenshots (Add at least 3)
+ Chaotic Signup Page  
 <img width="3188" height="1202" alt="frame (3)" src="./public/S2.png" />
 
 
 <img width="3188" height="1202" alt="frame (3)" src="./public/S1.png" />
 
-
+Normal Signup Page with mini games
 <img width="3188" height="1202" alt="frame (3)" src="./public/S3.png" />
 
+Mini Game 1:  
+<img width="3188" height="1202" alt="frame (3)" src="./public/S11.png" />
+Mini Game 2:  
+<img width="3188" height="1202" alt="frame (3)" src="./public/S12.png" />
+Mini Game 3:  
+<img width="3188" height="1202" alt="frame (3)" src="./public/S13.png" />
+Mini Game 4:  
+<img width="3188" height="1202" alt="frame (3)" src="./public/S14.png" />
+Mini Game 5:  
+<img width="3188" height="1202" alt="frame (3)" src="./public/S15.png" />
 
 # Diagrams
 ![Workflow](Add your workflow/architecture diagram here)
