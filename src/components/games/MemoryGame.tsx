@@ -99,7 +99,7 @@ export const MemoryGame: React.FC<MemoryGameProps> = ({ onComplete, onClose }) =
           <Button onClick={onClose} variant="outline">
             Cancel
           </Button>
-          <Button onClick={initializeGame} className="bg-game-primary text-white">
+          <Button onClick={initializeGame} className="bg-gradient-to-tr from-[hsl(264_83%_58%)] to-[hsl(142_76%_36%)]">
             Start Game
           </Button>
         </div>

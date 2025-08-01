@@ -166,7 +166,7 @@ export const ReactionGame: React.FC<ReactionGameProps> = ({ onComplete, onClose 
         </Button>
         
         {gameState === 'waiting' && currentRound < targetRounds && (
-          <Button onClick={startGame} className="bg-game-primary text-white">
+          <Button onClick={startGame} className="bg-blue-500">
             Start Round {currentRound + 1}
           </Button>
         )}
