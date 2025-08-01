@@ -24,7 +24,7 @@ The solution, which nobody asked for, is to make the signup process more tedious
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]:  
+- [Languages used]    
 TypeScript (with JSX)  
 JavaScript  
 HTML  
