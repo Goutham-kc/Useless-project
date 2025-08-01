@@ -77,13 +77,13 @@ Mini Game 5:
 
 ### Project Demo
 # Video
-[]
-*Explain what the video demonstrates*
+[https://drive.google.com/file/d/14WLSR3jIJjv8st9AoGuSRlpISscUTd7R/view?usp=sharing]
 
 
 ## Team Contributions
-- []: []
-- []: []
+- [Goutham kc]:
+- [Harikesh A]:
+This project was a collaborative effort with equal contributions from both members.
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 
