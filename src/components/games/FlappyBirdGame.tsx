@@ -22,12 +22,12 @@ export const FlappyBirdGame: React.FC<FlappyBirdGameProps> = ({ onComplete, onCl
   const [gameOver, setGameOver] = useState(false);
 
   // GAME CONSTANTS
-  const GRAVITY = 0.4;      // Gentle gravity
-  const JUMP_FORCE = -7;    // Much weaker upward boost
+  const GRAVITY = 0.4;      // Gentle gravity to slow fall
+  const JUMP_FORCE = -7;    // Reduced jump force for smaller boosts
   const PIPE_WIDTH = 60;
-  const PIPE_GAP = 180;     // Generous gap for easier play
+  const PIPE_GAP = 180;     // Larger gap to make passing easier
   const BIRD_SIZE = 30;
-  const PIPE_SPEED = 2;     // Slow pipes
+  const PIPE_SPEED = 2;     // Slower pipe movement
 
   const jump = useCallback(() => {
     if (!gameStarted) {
@@ -76,7 +76,7 @@ export const FlappyBirdGame: React.FC<FlappyBirdGameProps> = ({ onComplete, onCl
       setPipes(prev => {
         let newPipes = prev.map(pipe => ({ ...pipe, x: pipe.x - PIPE_SPEED }));
 
-        // Pipe spawn logic
+        // Spawn new pipe if needed
         if (newPipes.length === 0 || newPipes[newPipes.length - 1].x < 400) {
           const topHeight = Math.random() * 180 + 120;
           newPipes.push({
@@ -87,13 +87,14 @@ export const FlappyBirdGame: React.FC<FlappyBirdGameProps> = ({ onComplete, onCl
           });
         }
 
+        // Remove pipes out of screen
         newPipes = newPipes.filter(pipe => pipe.x > -PIPE_WIDTH);
 
-        // Score logic fix
+        // Scoring logic: score once per pipe when fully passed
         newPipes = newPipes.map(pipe => {
           if (
             !pipe.scored &&
-            pipe.x + PIPE_WIDTH < 100 // Bird's x-position (fixed at 100px)
+            pipe.x + PIPE_WIDTH < 100 // Bird's fixed x-position
           ) {
             setScore(s => s + 1);
             return { ...pipe, scored: true };
@@ -118,12 +119,10 @@ export const FlappyBirdGame: React.FC<FlappyBirdGameProps> = ({ onComplete, onCl
     }, 20);
 
     return () => clearInterval(gameLoop);
-    // Including all key props to quiet potential React warnings
   }, [gameStarted, gameOver, birdVelocity, birdY]);
 
   useEffect(() => {
-    // Reduce required score from 3 to 2 to complete and unlock
-    if (score >= 2) {
+    if (score >= 3) {
       onComplete();
     }
   }, [score, onComplete]);
@@ -170,23 +169,25 @@ export const FlappyBirdGame: React.FC<FlappyBirdGameProps> = ({ onComplete, onCl
           </div>
         ))}
 
-        {/* Game UI */}
+        {/* Score display */}
         <div className="absolute top-4 left-4 text-white font-bold text-xl">
-          Score: {score}/2
+          Score: {score}/3
         </div>
 
+        {/* Start screen overlay */}
         {!gameStarted && !gameOver && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white">
             <h3 className="text-2xl font-bold mb-4">🐦 Flappy Bird Challenge</h3>
-            <p className="mb-4">Get 2 points to unlock your field!</p>
+            <p className="mb-4">Get 3 points to unlock your field!</p>
             <p className="text-sm">Click or press SPACE to jump</p>
           </div>
         )}
 
+        {/* Game over screen overlay */}
         {gameOver && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-75 text-white">
             <h3 className="text-2xl font-bold mb-4">💥 Game Over!</h3>
-            <p className="mb-4">Score: {score}/2</p>
+            <p className="mb-4">Score: {score}/3</p>
             <div className="space-y-2">
               <Button onClick={resetGame} className="bg-blue-500 hover:bg-blue-600 text-white">
                 Try Again
@@ -203,7 +204,7 @@ export const FlappyBirdGame: React.FC<FlappyBirdGameProps> = ({ onComplete, onCl
         <Button onClick={onClose} variant="outline">
           Cancel
         </Button>
-        {score >= 2 && (
+        {score >= 3 && (
           <Button onClick={onComplete} className="bg-game-success text-white">
             🎉 Complete Challenge!
           </Button>
