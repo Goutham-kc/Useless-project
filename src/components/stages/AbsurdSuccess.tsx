@@ -11,7 +11,7 @@ export const AbsurdSuccess = ({ userName, onRestart }: AbsurdSuccessProps) => {
   const [isMuted, setIsMuted] = useState(false);
   
   useEffect(() => {
-    const audio = new Audio('');
+    const audio = new Audio('mm.mp3');
     audio.loop = true;
     audio.muted = isMuted;
     audio.play().catch((error) => console.error('Audio playback failed:', error));

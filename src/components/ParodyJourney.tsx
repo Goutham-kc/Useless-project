@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { LandingPage } from './stages/LandingPage';
 import { ChaosSignup } from './stages/ChaosSignup';
 import { NormalSignup } from './stages/NormalSignup';
-import { TermsEscapeGame } from './stages/TermsEscapeGame';
 import { AbsurdSuccess } from './stages/AbsurdSuccess';
 
 export type ParodyStage = 'landing' | 'chaos' | 'normal' | 'game' | 'success';
@@ -20,9 +19,6 @@ const ParodyJourney = () => {
         setCurrentStage('normal');
         break;
       case 'normal':
-        setCurrentStage('game');
-        break;
-      case 'game':
         setCurrentStage('success');
         break;
       default:

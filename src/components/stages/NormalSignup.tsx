@@ -220,7 +220,7 @@ export const NormalSignup: React.FC<NormalSignupProps> = ({ onNext, onUserName }
               disabled={!allFieldsUnlocked}
               className={`w-full font-semibold py-3 rounded-lg transition-all duration-300 ${
                 allFieldsUnlocked
-                  ? 'bg-gradient-to-r from-game-primary to-game-secondary hover:opacity-90 text-white shadow-[var(--shadow-game)] hover:scale-105'
+                  ? 'bg-blue-500'
                   : 'bg-muted text-muted-foreground cursor-not-allowed'
               }`}
             >
