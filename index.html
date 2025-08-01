@@ -1,150 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fickle Firefly Frenzy</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/addons/p5.sound.min.js"></script>
-  <style>
-    body {
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background-color: #111;
-      color: #fff;
-      font-family: Arial, sans-serif;
-    }
-    canvas {
-      border: 2px solid #fff;
-    }
-    h1 {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 16px;
-      text-align: center;
-      max-width: 400px;
-    }
-    #message {
-      position: absolute;
-      top: 20px;
-      font-size: 18px;
-      color: #ffcc00;
-      text-align: center;
-      display: none;
-    }
-  </style>
-</head>
-<body>
-  <h1>Fickle Firefly Frenzy</h1>
-  <p>Chase the firefly with your cursor! It’s pointless, it’s fickle, and it loves to mess with you.</p>
-  <div id="message"></div>
-  <script>
-    let fireflyX, fireflyY;
-    let fireflySpeed = 2;
-    let trails = [];
-    let sound;
-    let resetTimer = 0;
-    let showMessage = 0;
-    let messageText = "";
-    let isEmoji = false;
-    let emojiTimer = 0;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Useless-Project</title>
+    <meta name="description" content="Useless Project" />
+    <meta name="author" content="Gouthamkc" />
 
-    function preload() {
-      sound = loadSound('https://www.pachd.com/free-samples/sfx/click1.mp3'); // Free sound from pachd.com
-    }
+    <meta property="og:title" content="login-chaos-escape" />
+    <meta property="og:description" content="Useless Project" />
+    <meta property="og:type" content="website" />
+  </head>
 
-    function setup() {
-      createCanvas(640, 480);
-      fireflyX = random(width);
-      fireflyY = random(height);
-      resetTimer = random(300, 600); // Reset every 5-10 seconds
-      noCursor(); // Hide default cursor
-    }
-
-    function draw() {
-      background(20);
-
-      // Update firefly position
-      fireflyX += random(-fireflySpeed, fireflySpeed);
-      fireflyY += random(-fireflySpeed, fireflySpeed);
-      fireflyX = constrain(fireflyX, 0, width);
-      fireflyY = constrain(fireflyY, 0, height);
-
-      // Randomly turn firefly into emoji
-      if (random(1) < 0.01 && !isEmoji) {
-        isEmoji = true;
-        emojiTimer = 30; // Show emoji for ~0.5 seconds
-      }
-      if (isEmoji) {
-        emojiTimer--;
-        if (emojiTimer <= 0) isEmoji = false;
-      }
-
-      // Draw trails
-      trails.push({ x: fireflyX, y: fireflyY, life: 60 });
-      for (let i = trails.length - 1; i >= 0; i--) {
-        let t = trails[i];
-        fill(255, 255, 0, map(t.life, 0, 60, 0, 200));
-        noStroke();
-        ellipse(t.x, t.y, 8, 8);
-        t.life--;
-        if (t.life <= 0) trails.splice(i, 1);
-      }
-
-      // Draw firefly
-      if (isEmoji) {
-        textSize(20);
-        text("😜", fireflyX - 10, fireflyY + 5);
-      } else {
-        fill(255, 255, 0);
-        noStroke();
-        ellipse(fireflyX, fireflyY, 10, 10);
-      }
-
-      // Draw player cursor
-      fill(0, 255, 0);
-      ellipse(mouseX, mouseY, 15, 15);
-
-      // Check for catch
-      let d = dist(mouseX, mouseY, fireflyX, fireflyY);
-      if (d < 15) {
-        fireflyX = random(width);
-        fireflyY = random(height);
-        fireflySpeed += 0.5; // Make next firefly faster
-        trails = []; // Clear trails
-        if (sound.isLoaded()) sound.play();
-        messageText = "Got it! Here’s a faster one...";
-        showMessage = 120; // Show message for ~2 seconds
-      }
-
-      // Random reset
-      resetTimer--;
-      if (resetTimer <= 0) {
-        fireflyX = random(width);
-        fireflyY = random(height);
-        fireflySpeed = 2; // Reset speed
-        trails = [];
-        messageText = "Oops, firefly got bored!";
-        showMessage = 120;
-        resetTimer = random(300, 600);
-      }
-
-      // Display message
-      if (showMessage > 0) {
-        document.getElementById('message').style.display = 'block';
-        document.getElementById('message').innerText = messageText;
-        showMessage--;
-      } else {
-        document.getElementById('message').style.display = 'none';
-      }
-    }
-  </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96856ec5fa74ad28',t:'MTc1NDA1MjMyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
