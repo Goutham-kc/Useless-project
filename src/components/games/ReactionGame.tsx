@@ -179,7 +179,7 @@ export const ReactionGame: React.FC<ReactionGameProps> = ({ onComplete, onClose 
         )}
 
         {(gameState === 'clicked' || gameState === 'tooSoon') && currentRound < targetRounds && (
-          <Button onClick={nextRound} className="bg-game-secondary text-white">
+          <Button onClick={nextRound} className="bg-blue-500">
             Next Round
           </Button>
         )}
