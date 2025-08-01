@@ -43,7 +43,7 @@ export const NormalSignup: React.FC<NormalSignupProps> = ({ onNext, onUserName }
     lastName: { component: MemoryGame, title: 'Memory Match', icon: '🧠' },
     email: { component: ReactionGame, title: 'Lightning Reflexes', icon: '⚡' },
     password: { component: TypingGame, title: 'Speed Typing', icon: '⌨️' },
-    confirmPassword: { component: LogoGuessr, title: 'Number Puzzle', icon: '🧩' },
+    confirmPassword: { component: LogoGuessr, title: 'Logo Guessing Game', icon: '🧩' },
   };
 
   const handleSubmit = (e: React.FormEvent) => {
