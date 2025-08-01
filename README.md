@@ -39,8 +39,6 @@ A toast notification library
 Vite  
 Git  
 
-### Implementation
-For Software:
 # Installation
 git clone [repository URL]  
 cd [project-folder-name]  
@@ -53,45 +51,24 @@ npm run dev
 For Software:
 
 # Screenshots (Add at least 3)
-<img width="3188" height="1202" alt="frame (3)" src="Screenshot_2.png" />
+<img width="3188" height="1202" alt="frame (3)" src="S2.png" />
 
 
-<img width="3188" height="1202" alt="frame (3)" src="Screenshot_1.png" />
+<img width="3188" height="1202" alt="frame (3)" src="S1.png" />
 
 
-<img width="3188" height="1202" alt="frame (3)" src="Screenshot_4.png" />
+<img width="3188" height="1202" alt="frame (3)" src="S3.png" />
 
 
 # Diagrams
 ![Workflow](Add your workflow/architecture diagram here)
 *Add caption explaining your workflow*
 
-For Hardware:
-
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
-# Build Photos
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
-
 ### Project Demo
 # Video
-[Add your demo video link here]
+[]
 *Explain what the video demonstrates*
 
-# Additional Demos
-[Add any extra demo materials/links]
 
 ## Team Contributions
 - [Name 1]: [Specific contributions]
