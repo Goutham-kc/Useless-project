@@ -115,7 +115,7 @@ export const PuzzleGame: React.FC<PuzzleGameProps> = ({ onComplete, onClose }) =
           <Button onClick={onClose} variant="outline">
             Cancel
           </Button>
-          <Button onClick={initializeGame} className="bg-game-primary text-white">
+          <Button onClick={initializeGame} className="bg-blue-500">
             Start Puzzle
           </Button>
         </div>

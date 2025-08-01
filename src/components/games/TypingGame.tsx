@@ -135,7 +135,7 @@ export const TypingGame: React.FC<TypingGameProps> = ({ onComplete, onClose }) =
           <Button onClick={onClose} variant="outline">
             Cancel
           </Button>
-          <Button onClick={startGame} className="bg-game-primary text-white">
+          <Button onClick={startGame} className="bg-blue-500">
             Start Typing
           </Button>
         </div>
