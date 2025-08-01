@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Parody Web Experience Design System - Satirical UX Journey */
+
+@layer base {
+  :root {
+    /* Corporate "Normal" Theme */
+    --background: 210 20% 98%;
+    --foreground: 215 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 15%;
+
+    /* Professional Blue Brand */
+    --primary: 217 91% 60%;
+    --primary-foreground: 210 40% 98%;
+    --primary-hover: 217 91% 55%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 215 25% 15%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 210 40% 98%;
+
+    /* Chaos/Error Colors */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --chaos-red: 0 100% 50%;
+    --chaos-orange: 25 100% 50%;
+    --chaos-yellow: 45 100% 50%;
+
+    /* Retro Game Colors */
+    --retro-green: 120 100% 40%;
+    --retro-amber: 45 100% 50%;
+    --retro-bg: 120 20% 10%;
+
+    /* Success/Corporate Colors */
+    --success-gold: 45 100% 60%;
+    --success-purple: 270 50% 60%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    /* Gradients */
+    --gradient-corporate: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-hover)));
+    --gradient-chaos: linear-gradient(45deg, hsl(var(--chaos-red)), hsl(var(--chaos-orange)), hsl(var(--chaos-yellow)));
+    --gradient-retro: linear-gradient(180deg, hsl(var(--retro-bg)), hsl(120 20% 5%));
+    --gradient-success: linear-gradient(135deg, hsl(var(--success-gold)), hsl(var(--success-purple)));
+
+    /* Shadows */
+    --shadow-corporate: 0 10px 30px -10px hsl(var(--primary) / 0.1);
+    --shadow-chaos: 0 0 20px hsl(var(--chaos-red) / 0.5);
+    --shadow-retro: 0 0 10px hsl(var(--retro-green) / 0.3);
+    --shadow-success: 0 20px 40px -10px hsl(var(--success-gold) / 0.3);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-chaos: all 0.1s ease-in-out;
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .dark {
+    /* Dark mode maintains the parody themes */
+    --background: 215 30% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 215 30% 12%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 215 30% 12%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217 91% 70%;
+    --primary-foreground: 215 30% 8%;
+    --primary-hover: 217 91% 65%;
+
+    --secondary: 215 30% 18%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 215 30% 18%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 91% 70%;
+    --accent-foreground: 215 30% 8%;
+
+    --destructive: 0 84% 70%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 30% 18%;
+    --input: 215 30% 18%;
+    --ring: 217 91% 70%;
+
+    /* Dark mode gradients */
+    --gradient-corporate: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-hover)));
+    --gradient-chaos: linear-gradient(45deg, hsl(var(--chaos-red)), hsl(var(--chaos-orange)), hsl(var(--chaos-yellow)));
+    --gradient-retro: linear-gradient(180deg, hsl(var(--retro-bg)), hsl(120 20% 5%));
+    --gradient-success: linear-gradient(135deg, hsl(var(--success-gold)), hsl(var(--success-purple)));
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  /* Parody-specific utility classes */
+  .corporate-gradient {
+    background: var(--gradient-corporate);
+  }
+
+  .chaos-gradient {
+    background: var(--gradient-chaos);
+  }
+
+  .retro-gradient {
+    background: var(--gradient-retro);
+  }
+
+  .success-gradient {
+    background: var(--gradient-success);
+  }
+
+  .corporate-shadow {
+    box-shadow: var(--shadow-corporate);
+  }
+
+  .chaos-shadow {
+    box-shadow: var(--shadow-chaos);
+  }
+
+  .retro-shadow {
+    box-shadow: var(--shadow-retro);
+  }
+
+  .success-shadow {
+    box-shadow: var(--shadow-success);
+  }
+
+  /* Animation classes */
+  .chaos-shake {
+    animation: shake 0.5s infinite;
+  }
+
+  .chaos-jump {
+    animation: jump 0.3s ease-in-out infinite alternate;
+  }
+
+  .retro-glow {
+    text-shadow: 0 0 10px hsl(var(--retro-green));
+  }
+
+  .success-pulse {
+    animation: successPulse 2s ease-in-out infinite;
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px) rotate(-1deg); }
+  75% { transform: translateX(5px) rotate(1deg); }
+}
+
+@keyframes jump {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+@keyframes successPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
