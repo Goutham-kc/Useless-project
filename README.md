@@ -47,9 +47,6 @@ npm i
 # Run
 npm run dev
 
-### Project Documentation
-For Software:
-
 # Screenshots (Add at least 3)
  Chaotic Signup Page  
 <img width="3188" height="1202" alt="frame (3)" src="./public/S2.png" />
@@ -71,10 +68,6 @@ Mini Game 4:
 Mini Game 5:  
 <img width="3188" height="1202" alt="frame (3)" src="./public/S15.png" />
 
-# Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
-
 ### Project Demo
 # Video
 [https://drive.google.com/file/d/14WLSR3jIJjv8st9AoGuSRlpISscUTd7R/view?usp=sharing]
@@ -82,7 +75,7 @@ Mini Game 5:
 
 ## Team Contributions
 - [Goutham kc]:
-- [Harikesh A]:
+- [Harikesh A]:  
 This project was a collaborative effort with equal contributions from both members.
 
 ---
