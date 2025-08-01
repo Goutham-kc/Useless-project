@@ -24,27 +24,27 @@ The solution, which nobody asked for, is to make the signup process more tedious
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]:
-TypeScript (with JSX)
-JavaScript
-HTML
-CSS
-- [Frameworks used]
-Tailwind CSS
-- [Libraries used]
-React
-A component library for UI elements
-A toast notification library
-- [Tools used]
-Vite
-Git
+- [Languages used]:  
+TypeScript (with JSX)  
+JavaScript  
+HTML  
+CSS  
+- [Frameworks used]  
+Tailwind CSS  
+- [Libraries used]  
+React  
+A component library for UI elements  
+A toast notification library  
+- [Tools used]  
+Vite  
+Git  
 
 ### Implementation
 For Software:
 # Installation
-git clone [repository URL]
-cd [project-folder-name]
-npm i
+git clone [repository URL]  
+cd [project-folder-name]  
+npm i  
 
 # Run
 npm run dev
