@@ -53,13 +53,13 @@ npm run dev
 For Software:
 
 # Screenshots (Add at least 3)
-<img width="3188" height="1202" alt="frame (3)" src="" />
+<img width="3188" height="1202" alt="frame (3)" src="Screenshot_2.png" />
 
 
-<img width="3188" height="1202" alt="frame (3)" src="" />
+<img width="3188" height="1202" alt="frame (3)" src="Screenshot_1.png" />
 
 
-<img width="3188" height="1202" alt="frame (3)" src="" />
+<img width="3188" height="1202" alt="frame (3)" src="Screenshot_4.png" />
 
 
 # Diagrams
