@@ -8,6 +8,7 @@ import { MemoryGame } from '../games/MemoryGame';
 import { ReactionGame } from '../games/ReactionGame';
 import { TypingGame } from '../games/TypingGame';
 import { PuzzleGame } from '../games/PuzzleGame';
+import { LogoGuessr } from '../games/LogoGuessr';
 import { Lock, Unlock, Gamepad2, Trophy } from 'lucide-react';
 
 interface NormalSignupProps {
@@ -42,7 +43,7 @@ export const NormalSignup: React.FC<NormalSignupProps> = ({ onNext, onUserName }
     lastName: { component: MemoryGame, title: 'Memory Match', icon: '🧠' },
     email: { component: ReactionGame, title: 'Lightning Reflexes', icon: '⚡' },
     password: { component: TypingGame, title: 'Speed Typing', icon: '⌨️' },
-    confirmPassword: { component: PuzzleGame, title: 'Number Puzzle', icon: '🧩' },
+    confirmPassword: { component: LogoGuessr, title: 'Number Puzzle', icon: '🧩' },
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -168,9 +169,6 @@ export const NormalSignup: React.FC<NormalSignupProps> = ({ onNext, onUserName }
             <Gamepad2 className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-foreground">Unlock & Play Signup</h1>
-          <p className="text-muted-foreground">
-            Complete mini-games to unlock each field and create your account!
-          </p>
           <div className="flex justify-center space-x-1">
             {Object.entries(fieldStatus).map(([field, unlocked]) => (
               <div
