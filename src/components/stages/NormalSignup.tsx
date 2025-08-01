@@ -112,7 +112,7 @@ export const NormalSignup: React.FC<NormalSignupProps> = ({ onNext, onUserName }
             <Button
               type="button"
               onClick={() => handleGameStart(field)}
-              className="bg-gradient-to-r from-game-primary to-game-secondary hover:opacity-90 text-white font-medium px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 shadow-[var(--shadow-game)]"
+              className="bg-gradient-to-r from-purple-500 to-green-500 text-white font-bold py-2 px-4 rounded-full shadow-lg"
             >
               <Gamepad2 className="w-4 h-4 mr-2" />
               Play {gameData.icon}
