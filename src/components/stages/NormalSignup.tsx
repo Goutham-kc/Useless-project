@@ -235,12 +235,6 @@ export const NormalSignup: React.FC<NormalSignupProps> = ({ onNext, onUserName }
             </Button>
           </form>
         </Card>
-
-        <div className="text-center">
-          <p className="text-sm text-muted-foreground">
-            🎮 Gaming meets productivity - make form filling fun!
-          </p>
-        </div>
       </div>
     </div>
   );
