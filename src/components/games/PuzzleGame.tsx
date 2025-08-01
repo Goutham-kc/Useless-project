@@ -11,15 +11,15 @@ export const PuzzleGame: React.FC<PuzzleGameProps> = ({ onComplete, onClose }) =
   const [moves, setMoves] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
-  
+
   const GRID_SIZE = 4;
   const EMPTY_TILE = null;
 
   const initializeGame = () => {
-    // Create solved state: [1, 2, 3, ..., 14, 15, null]
+    // Create solved state: [1, 2, ..., 15, null]
     const solvedGrid = Array.from({ length: GRID_SIZE * GRID_SIZE - 1 }, (_, i) => i + 1);
     solvedGrid.push(EMPTY_TILE);
-    
+
     // Shuffle the grid
     const shuffledGrid = [...solvedGrid];
     for (let i = 0; i < 1000; i++) {
@@ -28,7 +28,7 @@ export const PuzzleGame: React.FC<PuzzleGameProps> = ({ onComplete, onClose }) =
       const randomMove = possibleMoves[Math.floor(Math.random() * possibleMoves.length)];
       [shuffledGrid[emptyIndex], shuffledGrid[randomMove]] = [shuffledGrid[randomMove], shuffledGrid[emptyIndex]];
     }
-    
+
     setGrid(shuffledGrid);
     setMoves(0);
     setIsComplete(false);
@@ -40,21 +40,16 @@ export const PuzzleGame: React.FC<PuzzleGameProps> = ({ onComplete, onClose }) =
     const row = Math.floor(emptyIndex / GRID_SIZE);
     const col = emptyIndex % GRID_SIZE;
 
-    // Up
-    if (row > 0) moves.push(emptyIndex - GRID_SIZE);
-    // Down
-    if (row < GRID_SIZE - 1) moves.push(emptyIndex + GRID_SIZE);
-    // Left
-    if (col > 0) moves.push(emptyIndex - 1);
-    // Right
-    if (col < GRID_SIZE - 1) moves.push(emptyIndex + 1);
+    if (row > 0) moves.push(emptyIndex - GRID_SIZE);      // Up
+    if (row < GRID_SIZE - 1) moves.push(emptyIndex + GRID_SIZE); // Down
+    if (col > 0) moves.push(emptyIndex - 1);              // Left
+    if (col < GRID_SIZE - 1) moves.push(emptyIndex + 1);  // Right
 
     return moves;
   };
 
   const moveTile = (tileIndex: number) => {
     if (!gameStarted || isComplete) return;
-
     const emptyIndex = grid.indexOf(EMPTY_TILE);
     const possibleMoves = getPossibleMoves(emptyIndex);
 
@@ -84,13 +79,23 @@ export const PuzzleGame: React.FC<PuzzleGameProps> = ({ onComplete, onClose }) =
 
   const getTileColor = (value: number | null, index: number) => {
     if (value === EMPTY_TILE) return 'bg-gray-200 border-gray-300';
-    
     const isCorrectPosition = value === index + 1;
     if (isCorrectPosition) {
-      return 'bg-gradient-to-br from-game-success to-game-secondary text-white border-game-success';
+      return 'bg-gradient-to-br from-game-success to-game-secondary border-game-success';
     }
-    
-    return 'bg-gradient-to-br from-game-primary to-game-secondary text-white border-game-primary hover:shadow-lg';
+    return 'bg-gradient-to-br from-game-primary to-game-secondary border-game-primary hover:shadow-lg';
+  };
+
+  // Assign each number a unique color (repeat colors if > 15)
+  const getNumberColor = (value: number | null) => {
+    if (value === null) return '';
+    const colors = [
+      'text-red-600', 'text-orange-600', 'text-yellow-600', 'text-green-600',
+      'text-teal-600', 'text-blue-600', 'text-purple-600', 'text-pink-600',
+      'text-rose-600', 'text-cyan-600', 'text-lime-600', 'text-amber-600',
+      'text-fuchsia-600', 'text-indigo-600', 'text-violet-600'
+    ];
+    return colors[(value - 1) % colors.length];
   };
 
   if (!gameStarted) {
@@ -106,7 +111,6 @@ export const PuzzleGame: React.FC<PuzzleGameProps> = ({ onComplete, onClose }) =
             <p>🖱️ Click tiles next to the empty space to move them</p>
           </div>
         </div>
-        
         <div className="flex justify-center space-x-4">
           <Button onClick={onClose} variant="outline">
             Cancel
@@ -143,7 +147,9 @@ export const PuzzleGame: React.FC<PuzzleGameProps> = ({ onComplete, onClose }) =
                 ${value === EMPTY_TILE ? 'cursor-default hover:scale-100' : ''}
               `}
             >
-              {value}
+              {value && (
+                <span className={getNumberColor(value)}>{value}</span>
+              )}
             </div>
           ))}
         </div>

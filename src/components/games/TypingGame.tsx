@@ -24,7 +24,7 @@ export const TypingGame: React.FC<TypingGameProps> = ({ onComplete, onClose }) =
   const [isComplete, setIsComplete] = useState(false);
   
   const inputRef = useRef<HTMLInputElement>(null);
-  const targetWPM = 40;
+  const targetWPM = 30;
   const targetAccuracy = 90;
 
   const startGame = () => {
