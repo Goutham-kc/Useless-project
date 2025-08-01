@@ -13,7 +13,7 @@ const ParodyJourney = () => {
   const nextStage = () => {
     switch (currentStage) {
       case 'landing':
-        setCurrentStage('normal');
+        setCurrentStage('chaos');
         break;
       case 'chaos':
         setCurrentStage('normal');

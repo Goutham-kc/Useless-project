@@ -28,11 +28,11 @@ export const NormalSignup: React.FC<NormalSignupProps> = ({ onNext, onUserName }
   });
 
   const [fieldStatus, setFieldStatus] = useState({
-    firstName: true,
-    lastName: true,
-    email: true,
-    password: true,
-    confirmPassword: true,
+    firstName: false,
+    lastName: false,
+    email: false,
+    password: false,
+    confirmPassword: false,
   });
 
   const [activeGame, setActiveGame] = useState<string | null>(null);
