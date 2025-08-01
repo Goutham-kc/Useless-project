@@ -6,19 +6,28 @@ interface FlappyBirdGameProps {
   onClose: () => void;
 }
 
+interface Pipe {
+  x: number;
+  topHeight: number;
+  bottomY: number;
+  scored: boolean;
+}
+
 export const FlappyBirdGame: React.FC<FlappyBirdGameProps> = ({ onComplete, onClose }) => {
   const [birdY, setBirdY] = useState(300);
   const [birdVelocity, setBirdVelocity] = useState(0);
-  const [pipes, setPipes] = useState<Array<{ x: number; topHeight: number; bottomY: number }>>([]);
+  const [pipes, setPipes] = useState<Pipe[]>([]);
   const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
 
-  const GRAVITY = 0.6;
-  const JUMP_FORCE = -12;
+  // GAME CONSTANTS
+  const GRAVITY = 0.4;      // Gentle gravity
+  const JUMP_FORCE = -7;    // Much weaker upward boost
   const PIPE_WIDTH = 60;
-  const PIPE_GAP = 150;
+  const PIPE_GAP = 180;     // Generous gap for easier play
   const BIRD_SIZE = 30;
+  const PIPE_SPEED = 2;     // Slow pipes
 
   const jump = useCallback(() => {
     if (!gameStarted) {
@@ -27,7 +36,7 @@ export const FlappyBirdGame: React.FC<FlappyBirdGameProps> = ({ onComplete, onCl
     }
     if (gameOver) return;
     setBirdVelocity(JUMP_FORCE);
-  }, [gameStarted, gameOver]);
+  }, [gameStarted, gameOver, JUMP_FORCE]);
 
   const resetGame = () => {
     setBirdY(300);
@@ -45,7 +54,6 @@ export const FlappyBirdGame: React.FC<FlappyBirdGameProps> = ({ onComplete, onCl
         jump();
       }
     };
-
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [jump]);
@@ -66,30 +74,42 @@ export const FlappyBirdGame: React.FC<FlappyBirdGameProps> = ({ onComplete, onCl
       setBirdVelocity(prev => prev + GRAVITY);
 
       setPipes(prev => {
-        let newPipes = prev.map(pipe => ({ ...pipe, x: pipe.x - 3 }));
-        
+        let newPipes = prev.map(pipe => ({ ...pipe, x: pipe.x - PIPE_SPEED }));
+
+        // Pipe spawn logic
         if (newPipes.length === 0 || newPipes[newPipes.length - 1].x < 400) {
-          const topHeight = Math.random() * 200 + 100;
+          const topHeight = Math.random() * 180 + 120;
           newPipes.push({
             x: 600,
             topHeight,
-            bottomY: topHeight + PIPE_GAP
+            bottomY: topHeight + PIPE_GAP,
+            scored: false
           });
         }
 
         newPipes = newPipes.filter(pipe => pipe.x > -PIPE_WIDTH);
 
-        // Check for collisions
+        // Score logic fix
+        newPipes = newPipes.map(pipe => {
+          if (
+            !pipe.scored &&
+            pipe.x + PIPE_WIDTH < 100 // Bird's x-position (fixed at 100px)
+          ) {
+            setScore(s => s + 1);
+            return { ...pipe, scored: true };
+          }
+          return pipe;
+        });
+
+        // Collision detection
         newPipes.forEach(pipe => {
-          if (pipe.x < 100 + BIRD_SIZE && pipe.x + PIPE_WIDTH > 100) {
+          if (
+            pipe.x < 100 + BIRD_SIZE &&
+            pipe.x + PIPE_WIDTH > 100
+          ) {
             if (birdY < pipe.topHeight || birdY + BIRD_SIZE > pipe.bottomY) {
               setGameOver(true);
             }
-          }
-          
-          // Score when passing pipe
-          if (pipe.x + PIPE_WIDTH === 97) {
-            setScore(s => s + 1);
           }
         });
 
@@ -98,10 +118,12 @@ export const FlappyBirdGame: React.FC<FlappyBirdGameProps> = ({ onComplete, onCl
     }, 20);
 
     return () => clearInterval(gameLoop);
+    // Including all key props to quiet potential React warnings
   }, [gameStarted, gameOver, birdVelocity, birdY]);
 
   useEffect(() => {
-    if (score >= 3) {
+    // Reduce required score from 3 to 2 to complete and unlock
+    if (score >= 2) {
       onComplete();
     }
   }, [score, onComplete]);
@@ -116,10 +138,10 @@ export const FlappyBirdGame: React.FC<FlappyBirdGameProps> = ({ onComplete, onCl
         <div
           className="absolute w-8 h-8 bg-yellow-400 rounded-full transition-transform duration-75 flex items-center justify-center text-lg"
           style={{
-            left: '100px',
-            top: `${birdY}px`,
-            transform: `rotate(${Math.min(birdVelocity * 3, 45)}deg)`
-          }}
+             left: '100px',
+             top: `${birdY}px`,
+             transform: `rotate(${Math.min(birdVelocity * 3, 45)}deg)`
+           }}
         >
           🐦
         </div>
@@ -150,13 +172,13 @@ export const FlappyBirdGame: React.FC<FlappyBirdGameProps> = ({ onComplete, onCl
 
         {/* Game UI */}
         <div className="absolute top-4 left-4 text-white font-bold text-xl">
-          Score: {score}/3
+          Score: {score}/2
         </div>
 
         {!gameStarted && !gameOver && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white">
             <h3 className="text-2xl font-bold mb-4">🐦 Flappy Bird Challenge</h3>
-            <p className="mb-4">Get 3 points to unlock your field!</p>
+            <p className="mb-4">Get 2 points to unlock your field!</p>
             <p className="text-sm">Click or press SPACE to jump</p>
           </div>
         )}
@@ -164,7 +186,7 @@ export const FlappyBirdGame: React.FC<FlappyBirdGameProps> = ({ onComplete, onCl
         {gameOver && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-75 text-white">
             <h3 className="text-2xl font-bold mb-4">💥 Game Over!</h3>
-            <p className="mb-4">Score: {score}/3</p>
+            <p className="mb-4">Score: {score}/2</p>
             <div className="space-y-2">
               <Button onClick={resetGame} className="bg-blue-500 hover:bg-blue-600 text-white">
                 Try Again
@@ -181,7 +203,7 @@ export const FlappyBirdGame: React.FC<FlappyBirdGameProps> = ({ onComplete, onCl
         <Button onClick={onClose} variant="outline">
           Cancel
         </Button>
-        {score >= 3 && (
+        {score >= 2 && (
           <Button onClick={onComplete} className="bg-game-success text-white">
             🎉 Complete Challenge!
           </Button>
