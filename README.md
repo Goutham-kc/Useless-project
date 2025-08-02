@@ -72,6 +72,8 @@ Mini Game 5:
 # Video
 [https://drive.google.com/file/d/14WLSR3jIJjv8st9AoGuSRlpISscUTd7R/view?usp=sharing]
 
+# Additional Demos
+[https://drive.google.com/file/d/1a0raJX1H-n1Db8Rmq5_7kFJxwMqUI1Na/view?usp=sharing] A more Chaotic version of the first page
 
 ## Team Contributions
 - [Goutham kc]:
